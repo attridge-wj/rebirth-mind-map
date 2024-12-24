@@ -108,11 +108,11 @@ export default class Shape {
   }
 
   // 创建路径节点
-  createPath(pathStr) {
-    const { customCreateNodePath } = this.mindMap.opt
-    if (customCreateNodePath) {
-      return SVG(customCreateNodePath(pathStr))
-    }
+  createPath(pathStr, node) {
+    const { customCreateNodePath } = this.mindMap.opt;
+		if (customCreateNodePath) {
+			return SVG(customCreateNodePath(pathStr, node));
+		}
     return new Path().plot(pathStr)
   }
 
@@ -120,7 +120,7 @@ export default class Shape {
   createPolygon(points) {
     const { customCreateNodePolygon } = this.mindMap.opt
     if (customCreateNodePolygon) {
-      return SVG(customCreateNodePolygon(points))
+      return SVG(customCreateNodePolygon(points, this.node))
     }
     return new Polygon().plot(points)
   }
@@ -143,7 +143,7 @@ export default class Shape {
       C${0},${borderRadius} ${0},${0} ${borderRadius},${0}
       Z
     `
-    return this.createPath(pathStr)
+    return this.createPath(pathStr, this.node);
   }
 
   //  创建菱形
@@ -193,7 +193,7 @@ export default class Shape {
       L${halfHeight},${height}
       A${height / 2},${height / 2} 0 0,1 ${halfHeight},${0}
     `
-    return this.createPath(pathStr)
+    return this.createPath(pathStr, this.node)
   }
 
   //  创建八角矩形
@@ -256,7 +256,7 @@ export default class Shape {
       M${halfWidth},${height} 
       A${halfWidth},${halfHeight} 0 0,1 ${halfWidth},${0} 
     `
-    return this.createPath(pathStr)
+    return this.createPath(pathStr, this.node)
   }
 
   //  创建圆
@@ -270,7 +270,7 @@ export default class Shape {
       M${halfWidth},${height} 
       A${halfWidth},${halfHeight} 0 0,1 ${halfWidth},${0} 
     `
-    return this.createPath(pathStr)
+    return this.createPath(pathStr, this.node)
   }
 }
 

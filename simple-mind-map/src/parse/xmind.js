@@ -139,8 +139,13 @@ const transformOldXmind = content => {
     try {
       const notesElement = getItemByName(nodeElements, 'notes')
       if (notesElement) {
-        newNode.data.note =
-          notesElement.elements[0].elements[0].elements[0].text
+        let noteContentElements = notesElement.elements[0].elements;
+				newNode.data.note = '';
+				for (let i = 0; i < noteContentElements.length; i++) {
+					if (noteContentElements[i].elements && noteContentElements[i].elements.length) {
+						newNode.data.note += noteContentElements[i].elements[0].text + '\n';
+					}
+				}
       }
     } catch (error) {
       console.log(error)

@@ -9,29 +9,31 @@ class AutoMove {
   onMove(x, y, callback = () => {}, handle = () => {}) {
     callback()
     // 检测边缘移动
-    let step = this.mindMap.opt.selectTranslateStep
-    let limit = this.mindMap.opt.selectTranslateLimit
-    let count = 0
+    let step = this.mindMap.opt.selectTranslateStep;
+		let limit = this.mindMap.opt.selectTranslateLimit;
+		let count = 0;
+		const { left, top, bottom, right } = this.mindMap.el.getBoundingClientRect();
+		
     // 左边缘
-    if (x <= this.mindMap.elRect.left + limit) {
+    if (x <= left + limit) {
       handle('left', step)
       this.mindMap.view.translateX(step)
       count++
     }
     // 右边缘
-    if (x >= this.mindMap.elRect.right - limit) {
+    if (x >= right - limit) {
       handle('right', step)
       this.mindMap.view.translateX(-step)
       count++
     }
     // 上边缘
-    if (y <= this.mindMap.elRect.top + limit) {
+    if (y <= top + limit) {
       handle('top', step)
       this.mindMap.view.translateY(step)
       count++
     }
     // 下边缘
-    if (y >= this.mindMap.elRect.bottom - limit) {
+    if (y >= bottom - limit) {
       handle('bottom', step)
       this.mindMap.view.translateY(-step)
       count++

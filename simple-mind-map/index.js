@@ -472,9 +472,9 @@ class MindMap {
   //  转换位置
   toPos(x, y) {
     return {
-      x: x - this.elRect.left,
-      y: y - this.elRect.top
-    }
+			x: x - this.el.getBoundingClientRect().left,
+			y: y - this.el.getBoundingClientRect().top
+		};
   }
 
   //  设置只读模式、编辑模式
@@ -526,7 +526,7 @@ class MindMap {
     const origWidth = svg.width()
     const origHeight = svg.height()
     const origTransform = draw.transform()
-    const elRect = this.elRect
+    const elRect = this.el.getBoundingClientRect();
     // 去除放大缩小的变换效果
     draw.scale(1 / origTransform.scaleX, 1 / origTransform.scaleY)
     // 获取变换后的位置尺寸信息，其实是getBoundingClientRect方法的包装方法
