@@ -292,6 +292,7 @@ class OuterFrame {
       cur => {
         if (!cur) return
         const outerFrameList = getNodeOuterFrameList(cur)
+        const elRect = this.mindMap.el.getBoundingClientRect()
         if (outerFrameList && outerFrameList.length > 0) {
           outerFrameList.forEach(({ nodeList, range }) => {
             if (range[0] === -1 || range[1] === -1) return
@@ -307,12 +308,12 @@ class OuterFrame {
             const el = this.createOuterFrameEl(
               (left -
                 outerFramePaddingX -
-                this.mindMap.elRect.left -
+                elRect.left -
                 t.translateX) /
                 t.scaleX,
               (top -
                 outerFramePaddingY -
-                this.mindMap.elRect.top -
+                elRect.top -
                 t.translateY) /
                 t.scaleY,
               (width + outerFramePaddingX * 2) / t.scaleX,

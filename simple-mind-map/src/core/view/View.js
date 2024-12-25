@@ -309,7 +309,7 @@ class View {
     const drawWidth = rect.width / origTransform.scaleX
     const drawHeight = rect.height / origTransform.scaleY
     const drawRatio = drawWidth / drawHeight
-    let { width: elWidth, height: elHeight } = this.mindMap.elRect
+    let { width: elWidth, height: elHeight, left: elRectLeft, top: elRectTop } = this.mindMap.el.getBoundingClientRect()
     elWidth = elWidth - fitPadding * 2
     elHeight = elHeight - fitPadding * 2
     const elRatio = elWidth / elHeight
@@ -335,8 +335,8 @@ class View {
     this.setScale(newScale)
     const newRect = getRbox() || draw.rbox()
     // 需要考虑画布容器距浏览器窗口左上角的距离
-    newRect.x -= this.mindMap.elRect.left
-    newRect.y -= this.mindMap.elRect.top
+    newRect.x -= elRectLeft
+    newRect.y -= elRectTop
     let newX = 0
     let newY = 0
     if (flag === 1) {
