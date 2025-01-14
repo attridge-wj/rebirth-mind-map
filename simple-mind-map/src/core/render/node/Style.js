@@ -124,8 +124,16 @@ class Style {
     node.radius(this.merge('borderRadius'))
   }
 
+  getBorderColor(color) {
+    let config = this.ctx.mindMap.getConfig('rainbowLinesConfig') || {}
+    if (!this.ctx.mindMap.rainbowLines || !config.open) {
+      return this.merge('borderColor');
+    }
+    return color;
+  }
+
   // 形状
-  shape(node) {
+  shape(node, color) {
     const styles = {
       gradientStyle: this.merge('gradientStyle'),
       startColor: this.merge('startColor'),
@@ -133,7 +141,7 @@ class Style {
       startDir: this.merge('startDir'),
       endDir: this.merge('endDir'),
       fillColor: this.merge('fillColor'),
-      borderColor: this.merge('borderColor'),
+      borderColor: this.getBorderColor(color),
       borderWidth: this.merge('borderWidth'),
       borderDasharray: this.merge('borderDasharray')
     }

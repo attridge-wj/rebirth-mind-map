@@ -27,7 +27,7 @@ class RainbowLines {
     if (this.mindMap.opt.rainbowLinesConfig.open) {
       this.removeNodeLineColor()
     }
-    this.mindMap.render()
+    this.mindMap.render(() => {}, true)
   }
 
   // 删除所有节点的连线颜色

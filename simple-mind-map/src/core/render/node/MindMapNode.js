@@ -446,7 +446,14 @@ class MindMapNode {
     this.shapeNode = this.shapeInstance.createShape()
     this.shapeNode.addClass('smm-node-shape')
     this.shapeNode.translate(halfBorderWidth, halfBorderWidth)
-    this.style.shape(this.shapeNode)
+    const color =  this.getRainbowLineColor({
+      ...this.shapeNode,
+      layerIndex: this.layerIndex,
+      isRoot: this.isRoot,
+      parent: this.parent,
+      uid: this.uid
+    })
+    this.style.shape(this.shapeNode, color)
     this.group.add(this.shapeNode)
     // 渲染一个隐藏的矩形区域，用来触发展开收起按钮的显示
     this.renderExpandBtnPlaceholderRect()
@@ -1026,6 +1033,8 @@ class MindMapNode {
     // 子节点
     if (this.children && this.children.length) {
       this.children.forEach(item => {
+        console.log(item, 'noderender');
+        
         item.show()
       })
     }
