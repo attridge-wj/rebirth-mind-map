@@ -711,6 +711,10 @@ class MindMapNode {
       }
       this.mindMap.emit('node_mouseenter', this, e)
     })
+    this.group.on('drop', e => {
+      if (this.isDrag) return
+      this.mindMap.emit('node_drop', this, e)
+    })
     this.group.on('mouseleave', e => {
       if (!this._isMouseenter) return
       this._isMouseenter = false
